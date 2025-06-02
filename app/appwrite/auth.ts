@@ -1,10 +1,10 @@
-import { ID, OAuthProvider, Query } from "appwrite";
-import { account, database, appwriteConfig } from "~/appwrite/client";
-import { redirect } from "react-router";
+import {ID, OAuthProvider, Query} from "appwrite";
+import {account, database, appwriteConfig} from "~/appwrite/client";
+import {redirect} from "react-router";
 
 export const getExistingUser = async (id: string) => {
   try {
-    const { documents, total } = await database.listDocuments(
+    const {documents, total} = await database.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       [Query.equal("accountId", id)]
@@ -21,7 +21,7 @@ export const storeUserData = async () => {
     const user = await account.get();
     if (!user) throw new Error("User not found");
 
-    const { providerAccessToken } = (await account.getSession("current")) || {};
+    const {providerAccessToken} = (await account.getSession("current")) || {};
     const profilePicture = providerAccessToken
       ? await getGooglePicture(providerAccessToken)
       : null;
@@ -49,11 +49,11 @@ const getGooglePicture = async (accessToken: string) => {
   try {
     const response = await fetch(
       "https://people.googleapis.com/v1/people/me?personFields=photos",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      {headers: {Authorization: `Bearer ${accessToken}`}}
     );
     if (!response.ok) throw new Error("Failed to fetch Google profile picture");
 
-    const { photos } = await response.json();
+    const {photos} = await response.json();
     return photos?.[0]?.url || null;
   } catch (error) {
     console.error("Error fetching Google picture:", error);
@@ -86,7 +86,7 @@ export const getUser = async () => {
     const user = await account.get();
     if (!user) return redirect("/sign-in");
 
-    const { documents } = await database.listDocuments(
+    const {documents} = await database.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       [
@@ -101,3 +101,20 @@ export const getUser = async () => {
     return null;
   }
 };
+
+export const getAllUsers = async (limit: number, offset: number) => {
+  try {
+    const {documents: users, total} = await database.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      [Query.limit(limit), Query.offset(offset)]
+    )
+
+    if (total === 0) return {users: [], total};
+
+    return {users, total};
+  } catch (e) {
+    console.log('Error fetching users', e);
+    return {users: [], total: 0};
+  }
+}

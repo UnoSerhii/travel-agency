@@ -1,6 +1,4 @@
 // @ts-nocheck
-
-
 import {SidebarComponent} from "@syncfusion/ej2-react-navigations";
 import {useRef} from "react";
 import {NavItems} from "./index";

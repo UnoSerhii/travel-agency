@@ -1,10 +1,16 @@
 import {Header, StatsCard, TripCard} from "../../../components";
 import {dashboardStats, user, allTrips} from "~/constants"
+import {getUser} from "~/appwrite/auth";
+import type {Route} from "./+types/dashboard"
 
 const {totalUsers, usersJoined, tripsCreated, totalTrips, userRole} = dashboardStats;
 
-const Dashboard = () => {
+export async function clientLoader() {
+  return await getUser()
+}
 
+const Dashboard = ({loaderData}: Route.ComponentProps) => {
+  const user = loaderData as User | null;
 
   return (
     <main className="dashboard wrapper">
@@ -48,11 +54,11 @@ const Dashboard = () => {
               location={itinerary?.[0]?.location ?? ''}
               tags={tags}
               price={estimatedPrice}
-              />
-                ))}
-            </div>
-            </section>
-            </main>
-            )
-          }
-          export default Dashboard
+            />
+          ))}
+        </div>
+      </section>
+    </main>
+  )
+}
+export default Dashboard
