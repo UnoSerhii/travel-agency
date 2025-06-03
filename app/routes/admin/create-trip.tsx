@@ -2,7 +2,7 @@ import {Header} from "../../../components";
 import {ComboBoxComponent} from "@syncfusion/ej2-react-dropdowns";
 import type {Route} from "./+types/create-trip";
 import {selectItems, comboBoxItems} from "~/constants";
-import {cn, formatKey} from "../../../lib/utils";
+import {cn, formatKey} from "~/lib/utils";
 import {LayerDirective, LayersDirective, MapsComponent} from "@syncfusion/ej2-react-maps";
 import React, {useState} from "react";
 import {world_map} from "~/constants/world_map";

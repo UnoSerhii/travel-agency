@@ -1,6 +1,6 @@
 import {NavLink, useLoaderData, useNavigate} from "react-router";
 import {sidebarItems} from "~/constants";
-import {cn} from "../lib/utils";
+import {cn} from "~/lib/utils";
 import {Logo} from "./index";
 import {logoutUser} from "~/appwrite/auth";
 

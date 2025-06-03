@@ -1,13 +1,14 @@
-import { Link, useLocation } from "react-router";
+import {Link, useLocation} from "react-router";
 import {
   ChipDirective,
   ChipListComponent,
   ChipsDirective,
 } from "@syncfusion/ej2-react-buttons";
-import { cn, getFirstWord } from "../lib/utils";
+import {cn, getFirstWord} from "~/lib/utils";
 
-const TripCard = ({ id, name, location, imageUrl, tags, price }: TripCardProps) => {
+const TripCard = ({id, name, location, imageUrl, tags, price}: TripCardProps) => {
   const path = useLocation();
+
 
   return (
     <Link
@@ -18,24 +19,20 @@ const TripCard = ({ id, name, location, imageUrl, tags, price }: TripCardProps) 
       }
       className="block rounded-2xl overflow-hidden shadow-md bg-white hover:shadow-lg transition-shadow duration-300"
     >
-      {/* Зображення */}
       <img
         className="w-full h-48 object-cover sm:h-60 md:h-64"
         src={imageUrl}
         alt={name}
       />
 
-      {/* Контент */}
       <div className="p-4 space-y-2">
         <h2 className="text-lg font-semibold text-gray-800 truncate">{name}</h2>
 
-        {/* Локація */}
         <div className="flex items-center gap-2 text-sm text-gray-500">
-          <img src="/assets/icons/location-mark.svg" alt="location" className="size-4" />
+          <img src="/assets/icons/location-mark.svg" alt="location" className="size-4"/>
           <span>{location}</span>
         </div>
 
-        {/* Теги */}
         <ChipListComponent id="travel-chip">
           <ChipsDirective>
             {tags.map((tag, index) => (
@@ -53,7 +50,6 @@ const TripCard = ({ id, name, location, imageUrl, tags, price }: TripCardProps) 
           </ChipsDirective>
         </ChipListComponent>
 
-        {/* Ціна */}
         <div className="mt-3 text-right">
           <span className="tripCard-pill">
             {price}

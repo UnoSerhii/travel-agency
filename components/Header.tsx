@@ -1,4 +1,4 @@
-import {cn} from "../lib/utils";
+import {cn} from "~/lib/utils";
 import {useLocation, Link} from "react-router";
 import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
 

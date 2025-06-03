@@ -8,7 +8,7 @@ export const clientLoader = async () => {
   try {
     const user = await account.get()
 
-    if (user) return redirect('/')
+    if (user) return redirect('/dashboard')
   } catch (e) {
     console.log('Error fetching user' ,e);
   }

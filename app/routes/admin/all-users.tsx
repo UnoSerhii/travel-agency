@@ -1,6 +1,6 @@
 import {Header} from "../../../components";
 import {ColumnDirective, ColumnsDirective, GridComponent} from "@syncfusion/ej2-react-grids";
-import {cn, formatDate} from "../../../lib/utils";
+import {cn, formatDate} from "~/lib/utils";
 import {getAllUsers} from "~/appwrite/auth";
 import type {Route} from "./+types/all-users";
 
@@ -30,7 +30,8 @@ const AllUsers = ({loaderData}: Route.ComponentProps) => {
             textAlign="Left"
             template={({imageUrl, name}: User) => (
               <div className="flex items-center gap-1.5 px-4">
-                <img src={imageUrl} alt="avatar" className="w-10 h-10 rounded-full aspect-square"/>
+                <img src={imageUrl} alt="avatar" className="w-10 h-10 rounded-full aspect-square"
+                     referrerPolicy="no-referrer"/>
                 <span className="text-sm font-medium">{name}</span>
               </div>
             )}
