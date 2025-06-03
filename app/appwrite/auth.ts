@@ -61,16 +61,18 @@ const getGooglePicture = async (accessToken: string) => {
   }
 };
 
-export const loginWithGoogle = async () => {
-  try {
-    account.createOAuth2Session(
-      OAuthProvider.Google,
-      `${window.location.origin}/dashboard`,
-      `${window.location.origin}/404`
-    );
-  } catch (error) {
-    console.error("Error during OAuth2 session creation:", error);
-  }
+export const loginWithGoogle = () => {
+  const isLocalhost = window.location.hostname === "localhost";
+
+  const successUrl = isLocalhost
+    ? "http://localhost:5173/dashboard"
+    : "https://travel-agency-navy-three.vercel.app/dashboard";
+
+  const failureUrl = isLocalhost
+    ? "http://localhost:5173/sign-in"
+    : "https://travel-agency-navy-three.vercel.app/sign-in";
+
+  account.createOAuth2Session("google", successUrl, failureUrl);
 };
 
 export const logoutUser = async () => {
